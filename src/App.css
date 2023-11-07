@@ -1,0 +1,148 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+  background-color: antiquewhite;
+  width:78%;
+  margin:4px;
+  display: flex;
+}
+.img_card{
+  border-radius: 40%;
+  width:60px;
+  height: 40%;
+  display:flex;
+  box-shadow: 4px,10px;
+  transition: 0.3s;
+  left: 0px;
+}
+
+.read-the-docs {
+  color: #888;
+}
+.sidebar1 {
+  width: 70px;
+  height: 100%;
+  position: fixed;
+  top:0;
+  left:0;
+  background-color: #021553;
+}
+.icons{
+  padding-bottom: 30px;
+  font-size:25px;
+  color:white;
+}
+.Search{
+  width:200px;
+  border: 1px black solid;
+  border-radius: 8px;
+  align-items: center;
+  margin-left: 55px;
+}
+.topics{
+  width: 330px;
+  height: 100%;
+  position:fixed ;
+  top: 0px;
+  left: 70px;
+  background-color: darkgray;
+}
+.Nav{
+width: 100%;
+height: 60px;
+position: fixed;
+top: 0px;
+left:400px;
+background-color:#021553;
+color:white;
+align-items:center;
+}
+#Ellipsis{
+float: left;
+font-size: 45px;
+list-style-type: none;
+padding: 12px;
+}
+.input{
+  border: none;
+  background-color: darkgray;
+  outline-offset: 0cap;
+}
+
+.Chat{
+  background-color: #021553;
+  position: fixed;
+  width: 100%;
+  height:40px;
+  left: 400px;
+  padding: 10px;
+  padding-bottom: 20px;
+  bottom: 0;
+  display: flex;
+}
+#Chat_text{
+width:900px;
+height: 50px;
+font-size: 25px;
+border-radius:8px;
+margin:10px;
+}
+.avatar{
+  border-radius:40%;
+  padding: 10px;
+}
+.Plane{
+  color:black;
+  font-size: 30px;
+}
+.plus{
+color:white;
+font-size: 30px;
+float:left;
+padding:5px;
+}
+.username{
+  color:white;
+}
+.button{
+  background-color:#021553;
+}
+.pool{
+  display:center;
+  color:white;
+  align-items: center;
+}

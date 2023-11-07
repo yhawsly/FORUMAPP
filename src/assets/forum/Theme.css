@@ -1,0 +1,28 @@
+.app {
+  background-color: #f5f5f5;
+  color: #333;
+  transition: background-color 0.5s;
+}
+
+.app.dark {
+  background-color: #333;
+  color: #f5f5f5;
+}
+
+.toggle {
+  text-align: center;
+  padding: 1rem;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"] + label::before {
+  content: '☀️';
+  margin-right: 0.5rem;
+}
+
+input[type="checkbox"]:checked + label::before {
+  content: '🌙';
+}
