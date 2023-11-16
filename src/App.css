@@ -128,3 +128,9 @@ padding:5px;
   color:white;
   align-items: center;
 }
+.background{
+  color: #021553;
+  background-color: rgba(136, 136, 136, 0.239);
+  width: 1600px;
+  height: 900px;
+}

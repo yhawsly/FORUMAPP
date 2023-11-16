@@ -1,4 +1,5 @@
 import './App.css';
+import {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBell,
@@ -11,6 +12,8 @@ import {
   faFaceSmile
 } from '@fortawesome/free-solid-svg-icons';
 import { PiPaperPlaneRightFill } from "react-icons/pi";
+import Modal from './Modal';
+
 
 const user = {
   name: "Hedy Lamarr",
@@ -21,7 +24,11 @@ const user = {
 
 
 function App() {
-  return (
+  const [isOpen, setIsOpen] = useState(false);
+  const [onClose,setOnClose] = useState(true);
+
+
+      return (
     <>
       <div className="background">
         <div className="sidebar1">
@@ -68,10 +75,24 @@ function App() {
         </div>
 
         <div className="Chat">
-          <FontAwesomeIcon
+          <div  className='modal'>
+          <div onClick={()=>setIsOpen(!isOpen)}>
+            <FontAwesomeIcon
             className="plus"
             icon={faPlus}
-          />
+            />
+          </div>
+            <Modal isOpen={isOpen}  setIsOpen={setIsOpen}>
+              <div className="modal-list">
+                <li>DOCUMENT</li>
+                <li>AUDIO</li>
+                <li>CAMERA</li>
+                <li>CONTACT</li>
+                <li>POLL</li>
+                <li>GALLERY</li>
+              </div>
+            </Modal>
+            </div>
           <div className="">
             <FontAwesomeIcon className="plus" icon={faFaceSmile} />
             <input type="text" id="Chat_text" placeholder="Type message here" />
@@ -81,8 +102,8 @@ function App() {
             </button>
           </div>
         </div>
-        <div className="background"></div> 
-      </div>
+              </div>
+              <div className="background"></div> 
     </>
   );
 }
