@@ -41,7 +41,7 @@
   position: fixed;
   top:0;
   left:0;
-  background-color: #021553;
+  background-color: #2F4562;
 }
 .icons{
   padding-bottom: 30px;
@@ -69,7 +69,7 @@ height: 60px;
 position: fixed;
 top: 0px;
 left:400px;
-background-color:#021553;
+background-color:#2F4562;
 color:white;
 align-items:center;
 }
@@ -86,7 +86,7 @@ padding: 12px;
 }
 
 .Chat{
-  background-color: #021553;
+  background-color: #2F4562;
   position: fixed;
   width: 100%;
   height:40px;

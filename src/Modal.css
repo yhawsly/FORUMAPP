@@ -1,6 +1,6 @@
 .modal-overlay {
     position: absolute;
-    bottom: 70px;
+    bottom: 80px;
     width: 200px;
     left: 20;
     height: 400px;
@@ -10,6 +10,7 @@
     justify-content: center;
     list-style-type: none;
     border-radius: 20px;
+    padding: 30px;
 
 }
 
