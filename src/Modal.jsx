@@ -6,10 +6,10 @@ const Modal = ({ isOpen, setIsOpen, children }) => {
   return (
     <div className="modal-overlay" >
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        {children}
         <span className="close-btn" onClick={()=>setIsOpen(!isOpen)}>
           &times;
         </span>
-        {children}
       </div>
     </div>
   );

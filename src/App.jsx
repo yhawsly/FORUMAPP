@@ -8,8 +8,16 @@ import {
   faCopyright,
   faSearch,
   faPlus,
+  faFile,
+  faImages,
   faEllipsisVertical,
-  faFaceSmile
+  faFaceSmile,
+  faCamera,
+  faContactCard,
+  faPoll,
+  faQ,
+  faAudioDescription,
+  faFileAudio
 } from '@fortawesome/free-solid-svg-icons';
 import { PiPaperPlaneRightFill } from "react-icons/pi";
 import Modal from './Modal';
@@ -84,19 +92,20 @@ function App() {
           </div>
             <Modal isOpen={isOpen}  setIsOpen={setIsOpen}>
               <div className="modal-list">
-                <li>DOCUMENT</li>
-                <li>AUDIO</li>
-                <li>CAMERA</li>
-                <li>CONTACT</li>
-                <li>POLL</li>
-                <li>GALLERY</li>
+
+                <div className='i'><FontAwesomeIcon className="plus" icon={faFile} /><li>DOCUMENT</li></div>
+                <div className='i'><FontAwesomeIcon className="plus" icon={faImages}/><li>GALLERY</li></div>
+                <div className='i'><FontAwesomeIcon className="plus" icon={faCamera}/><li>CAMERA</li></div>
+                <div className='i'><FontAwesomeIcon className="plus" icon={faContactCard}/><li>CONTACT</li></div>
+                <div className='i'><FontAwesomeIcon className="plus" icon={faPoll}/><li>POLL</li></div>
+                <div className='i'><FontAwesomeIcon className="plus" icon={faFileAudio}/><li>AUDIO</li></div>
               </div>
             </Modal>
             </div>
           <div className="">
             <FontAwesomeIcon className="plus" icon={faFaceSmile} />
             <input type="text" id="Chat_text" placeholder="Type message here" />
-            <FontAwesomeIcon className="plus" icon={faGear} />
+            
             <button className="button">
               <PiPaperPlaneRightFill className="plus" />
             </button>

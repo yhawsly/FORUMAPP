@@ -17,7 +17,7 @@
 
 .card {
   padding: 2em;
-  background-color: antiquewhite;
+  background-color: #f8fc9a;
   width:78%;
   margin:4px;
   display: flex;
@@ -41,7 +41,7 @@
   position: fixed;
   top:0;
   left:0;
-  background-color: #2F4562;
+  background-color: #081B33;
 }
 .icons{
   padding-bottom: 30px;
@@ -61,7 +61,7 @@
   position:fixed ;
   top: 0px;
   left: 70px;
-  background-color: darkgray;
+  background-color: #767D92;
 }
 .Nav{
 width: 100%;
@@ -69,7 +69,7 @@ height: 60px;
 position: fixed;
 top: 0px;
 left:400px;
-background-color:#2F4562;
+background-color:#081B33;
 color:white;
 align-items:center;
 }
@@ -81,12 +81,12 @@ padding: 12px;
 }
 .input{
   border: none;
-  background-color: darkgray;
-  outline-offset: 0cap;
+  background-color: #767D92;
+  color: white;
 }
 
 .Chat{
-  background-color: #2F4562;
+  background-color: #081B33;
   position: fixed;
   width: 100%;
   height:40px;
@@ -121,7 +121,7 @@ padding:5px;
   color:white;
 }
 .button{
-  background-color:#021553;
+  background-color:#081B33;
 }
 .pool{
   display:center;
