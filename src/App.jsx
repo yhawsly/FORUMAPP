@@ -9,18 +9,11 @@ import {
   faSearch,
   faPlus,
   faFile,
-  faImages,
-  faEllipsisVertical,
-  faFaceSmile,
-  faCamera,
-  faContactCard,
-  faPoll,
-  faQ,
-  faAudioDescription,
-  faFileAudio
+faImages,faEllipsisVertical,faFaceSmile,faCamera,faContactCard,faPoll,faFileAudio
 } from '@fortawesome/free-solid-svg-icons';
 import { PiPaperPlaneRightFill } from "react-icons/pi";
 import Modal from './Modal';
+
 
 
 const user = {
@@ -33,6 +26,7 @@ const user = {
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [onClose,setOnClose] = useState(true);
 
 

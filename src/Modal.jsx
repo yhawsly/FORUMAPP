@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import './Modal.css';
 
 const Modal = ({ isOpen, setIsOpen, children }) => {
