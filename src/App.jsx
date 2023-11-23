@@ -53,7 +53,9 @@ function App() {
             <br />
             <FontAwesomeIcon className="icons" icon={faBell} />
             <br />
+            <div>
             <FontAwesomeIcon className="icons" icon={faGear} />
+            </div>
           </div>
         </div>
 
@@ -85,14 +87,29 @@ function App() {
             />
           </div>
             <Modal isOpen={isOpen}  setIsOpen={setIsOpen}>
+
+           
               <div className="modal-list">
 
-                <div className='i'><FontAwesomeIcon className="plus" icon={faFile} /><li>DOCUMENT</li></div>
-                <div className='i'><FontAwesomeIcon className="plus" icon={faImages}/><li>GALLERY</li></div>
-                <div className='i'><FontAwesomeIcon className="plus" icon={faCamera}/><li>CAMERA</li></div>
-                <div className='i'><FontAwesomeIcon className="plus" icon={faContactCard}/><li>CONTACT</li></div>
+                <div className='i'><FontAwesomeIcon className="plus" icon={faFile} />
+                <label htmlFor="file">DOCUMENT</label>
+                <input type="file" accept=".txt,.ppt/*" id="file"/>
+                </div>
+                <div className='i'><FontAwesomeIcon className="plus" icon={faImages}/>
+                <label htmlFor="gallery">GALLERY</label>
+                <input type="file" accept=".jpeg,png,jpg/*" id="gallery"/>
+                </div>
+                <div className='i'><FontAwesomeIcon className="plus" icon={faCamera}/>
+                <label htmlFor="camera">CAMERA</label>
+                <input type="file" accept="image/*" capture="user" id="camera"></input>
+                </div>
+                <div className='i'><FontAwesomeIcon className="plus" icon={faContactCard}/>
+                <li>CONTACT</li></div>
                 <div className='i'><FontAwesomeIcon className="plus" icon={faPoll}/><li>POLL</li></div>
-                <div className='i'><FontAwesomeIcon className="plus" icon={faFileAudio}/><li>AUDIO</li></div>
+                <div className='i'><FontAwesomeIcon className="plus" icon={faFileAudio}/>
+                <label htmlFor="audio">AUDIO</label>
+                <input type="file" accept=".mp4,.mp3,.mpv,.mkv/*" id="audio"/>
+                </div>
               </div>
             </Modal>
             </div>

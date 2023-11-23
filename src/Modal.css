@@ -34,3 +34,8 @@
 .i{
     display: flex;
 }
+#gallery{
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
