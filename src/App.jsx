@@ -1,130 +1,165 @@
 import './App.css';
-import {useState} from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBell,
   faGear,
-  faMessage,
-  faCopyright,
+  faHome,
+  faHashtag,
+  faUser,
   faSearch,
   faPlus,
-  faFile,
-faImages,faEllipsisVertical,faFaceSmile,faCamera,faContactCard,faPoll,faFileAudio
+  faEllipsisVertical,
+  faFaceSmile,
+  faImage,
 } from '@fortawesome/free-solid-svg-icons';
-import { PiPaperPlaneRightFill } from "react-icons/pi";
-import Modal from './Modal';
+import Post from './Post';
 
-
-
-const user = {
-  name: "Hedy Lamarr",
-  imageUrl: "https://i.imgur.com/yXOvdOSs.jpg",
-  imageUrls: "https://i.imgur.com/yXOvdOSs.jpg",
-  imageSize: 50,
-};
-
+const INITIAL_POSTS = [
+  {
+    id: 1,
+    user: {
+      name: "Hedy Lamarr",
+      avatar: "https://i.imgur.com/yXOvdOSs.jpg",
+    },
+    content: "Just started exploring the new Gospel Fun Forum! The layout is looking amazing. #Tech #Social",
+    timestamp: "2h ago",
+    likes: 12,
+    comments: 5,
+    retweets: 2,
+  },
+  {
+    id: 2,
+    user: {
+      name: "Greg Smith",
+      avatar: "https://i.pravatar.cc/150?u=greg",
+    },
+    content: "Does anyone have recommendations for good community management tools? 🛠️",
+    timestamp: "4h ago",
+    likes: 8,
+    comments: 12,
+    retweets: 1,
+  },
+];
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [onClose,setOnClose] = useState(true);
+  const [posts, setPosts] = useState(INITIAL_POSTS);
+  const [newPostContent, setNewPostContent] = useState('');
+  const [activeTab, setActiveTab] = useState('Home');
+  const [currentUser] = useState({
+    name: "Hedy Lamarr",
+    avatar: "https://i.imgur.com/yXOvdOSs.jpg",
+  });
 
+  const handleCreatePost = () => {
+    if (!newPostContent.trim()) return;
 
-      return (
-    <>
-      <div className="background">
-        <div className="sidebar1">
-          <div className>
-            <img
-              className="avatar"
-              src={user.imageUrl}
-              alt={"Photo of " + user.name}
-              style={{
-                width: user.imageSize,
-                height: user.imageSize,
-              }}
-            />
-            <p className="username">{user.name}</p>
+    const newPost = {
+      id: posts.length + 1,
+      user: currentUser,
+      content: newPostContent,
+      timestamp: "Just now",
+      likes: 0,
+      comments: 0,
+      retweets: 0,
+    };
+
+    setPosts([newPost, ...posts]);
+    setNewPostContent('');
+  };
+
+  const handleLike = (postId) => {
+    // In a real app, we would update the backend here
+    console.log(`Liked post ${postId}`);
+  };
+
+  return (
+    <div className="app">
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="nav-left">
+          <h1>Gospel Fun</h1>
+        </div>
+        <div className="search-bar">
+          <FontAwesomeIcon icon={faSearch} style={{ color: 'var(--text-secondary)' }} />
+          <input type="text" placeholder="Search for topics, people..." />
+        </div>
+        <div className="nav-right">
+          <FontAwesomeIcon icon={faBell} className="icon" style={{ cursor: 'pointer', fontSize: '1.2rem' }} />
+        </div>
+      </nav>
+
+      <div className="app-container">
+        {/* Sidebar */}
+        <aside className="sidebar">
+          <div className={`nav-item ${activeTab === 'Home' ? 'active' : ''}`} onClick={() => setActiveTab('Home')}>
+            <FontAwesomeIcon icon={faHome} className="icon" />
+            <span>Home</span>
           </div>
-          <div className="icons">
-            <FontAwesomeIcon className="icons" icon={faCopyright} />
-            <br />
-            <FontAwesomeIcon className="icons" icon={faMessage} />
-            <br />
-            <FontAwesomeIcon className="icons" icon={faBell} />
-            <br />
-            <div>
-            <FontAwesomeIcon className="icons" icon={faGear} />
+          <div className={`nav-item ${activeTab === 'Explore' ? 'active' : ''}`} onClick={() => setActiveTab('Explore')}>
+            <FontAwesomeIcon icon={faHashtag} className="icon" />
+            <span>Explore</span>
+          </div>
+          <div className={`nav-item ${activeTab === 'Notifications' ? 'active' : ''}`} onClick={() => setActiveTab('Notifications')}>
+            <FontAwesomeIcon icon={faBell} className="icon" />
+            <span>Notifications</span>
+          </div>
+          <div className={`nav-item ${activeTab === 'Profile' ? 'active' : ''}`} onClick={() => setActiveTab('Profile')}>
+            <FontAwesomeIcon icon={faUser} className="icon" />
+            <span>Profile</span>
+          </div>
+          <div className="nav-item">
+            <FontAwesomeIcon icon={faGear} className="icon" />
+            <span>Settings</span>
+          </div>
+        </aside>
+
+        {/* Feed */}
+        <main className="feed-container">
+          <div className="create-post">
+            <textarea
+              placeholder="What's on your mind?"
+              value={newPostContent}
+              onChange={(e) => setNewPostContent(e.target.value)}
+            />
+            <div className="create-post-actions">
+              <div className="media-options">
+                <FontAwesomeIcon icon={faImage} className="icon" style={{ color: 'var(--accent-color)', cursor: 'pointer', marginRight: '15px' }} />
+                <FontAwesomeIcon icon={faFaceSmile} className="icon" style={{ color: 'var(--accent-color)', cursor: 'pointer' }} />
+              </div>
+              <button className="post-btn" onClick={handleCreatePost}>Post</button>
             </div>
           </div>
-        </div>
 
-        <div className="topics">
-          <h2>Topics</h2>
-          <div className="Search">
-            <input type="text" placeholder="Search..." className="input" />
-            <FontAwesomeIcon className="icon" icon={faSearch} />
-          </div><br />
-          <div className='card'>
-            <img src={user.imageUrls} className='img_card' />
-            <h2>PU Channel</h2>
+          <div className="feed">
+            {posts.map(post => (
+              <Post key={post.id} post={post} onLike={handleLike} />
+            ))}
           </div>
-        </div>
+        </main>
 
-        <div className="Nav">
-          <li id="Ellipsis">
-            <FontAwesomeIcon className="icons" icon={faEllipsisVertical} />
-          </li>
-          <h2 className="pool">#GOSPEL FUN FORUM #GOSPEL FUN FORUM #GOSPEL FUN FORUM </h2>
-        </div>
-
-        <div className="Chat">
-          <div  className='modal'>
-          <div onClick={()=>setIsOpen(!isOpen)}>
-            <FontAwesomeIcon
-            className="plus"
-            icon={faPlus}
-            />
+        {/* Trending Sidebar */}
+        <aside className="trending-container">
+          <div className="trending-card">
+            <h3>Trending Now</h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '10px' }}>#GospelFunEvolution</p>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '10px' }}>#WebDevelopment</p>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '10px' }}>#ReactJS</p>
           </div>
-            <Modal isOpen={isOpen}  setIsOpen={setIsOpen}>
-
-           
-              <div className="modal-list">
-
-                <div className='i'><FontAwesomeIcon className="plus" icon={faFile} />
-                <label htmlFor="file">DOCUMENT</label>
-                <input type="file" accept=".txt,.ppt/*" id="file"/>
-                </div>
-                <div className='i'><FontAwesomeIcon className="plus" icon={faImages}/>
-                <label htmlFor="gallery">GALLERY</label>
-                <input type="file" accept=".jpeg,png,jpg/*" id="gallery"/>
-                </div>
-                <div className='i'><FontAwesomeIcon className="plus" icon={faCamera}/>
-                <label htmlFor="camera">CAMERA</label>
-                <input type="file" accept="image/*" capture="user" id="camera"></input>
-                </div>
-                <div className='i'><FontAwesomeIcon className="plus" icon={faContactCard}/>
-                <li>CONTACT</li></div>
-                <div className='i'><FontAwesomeIcon className="plus" icon={faPoll}/><li>POLL</li></div>
-                <div className='i'><FontAwesomeIcon className="plus" icon={faFileAudio}/>
-                <label htmlFor="audio">AUDIO</label>
-                <input type="file" accept=".mp4,.mp3,.mpv,.mkv/*" id="audio"/>
-                </div>
+          <div className="trending-card">
+            <h3>Who to follow</h3>
+            <div style={{ display: 'flex', alignItems: 'center', marginTop: '15px' }}>
+              <img src="https://i.pravatar.cc/150?u=sarah" alt="user" className="avatar" style={{ width: '35px', height: '35px' }} />
+              <div>
+                <p style={{ margin: 0, fontSize: '0.9rem' }}>Sarah Green</p>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>@sarah_g</span>
               </div>
-            </Modal>
             </div>
-          <div className="">
-            <FontAwesomeIcon className="plus" icon={faFaceSmile} />
-            <input type="text" id="Chat_text" placeholder="Type message here" />
-            
-            <button className="button">
-              <PiPaperPlaneRightFill className="plus" />
-            </button>
           </div>
-        </div>
-              </div>
-              <div className="background"></div> 
-    </>
+        </aside>
+      </div>
+    </div>
   );
 }
+
 export default App;
