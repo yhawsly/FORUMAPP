@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faComment, faShare, faRetweet, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faComment, faShare, faRetweet, faEnvelope, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
-const Post = ({ post, onLike, onComment, onShare, onMessage }) => {
+const Post = ({ post, onLike, onComment, onShare, onMessage, onShareToDM }) => {
   const [showComments, setShowComments] = useState(false);
   const [commentText, setCommentText] = useState('');
 
@@ -56,25 +56,28 @@ const Post = ({ post, onLike, onComment, onShare, onMessage }) => {
         <button className="action-btn" onClick={() => onMessage && onMessage(post.user)} title="Message User">
           <FontAwesomeIcon icon={faEnvelope} className="icon" />
         </button>
+        <button className="action-btn" onClick={() => onShareToDM && onShareToDM(post)} title="Forward to DM">
+          <FontAwesomeIcon icon={faArrowRight} className="icon" style={{ transform: 'rotate(-45deg)' }} />
+        </button>
       </div>
 
       {showComments && (
-        <div className="comments-section" style={{ marginTop: '15px', borderTop: '1px solid var(--border-color)', paddingTop: '15px' }}>
-          <form onSubmit={handleSubmitComment} style={{ display: 'flex', marginBottom: '15px' }}>
+        <div className="comments-section">
+          <form onSubmit={handleSubmitComment} className="comment-input-area">
             <input
               type="text"
               placeholder="Write a comment..."
+              className="comment-input"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              style={{ flex: 1, background: 'var(--primary-bg)', border: '1px solid var(--border-color)', borderRadius: '20px', padding: '8px 15px', color: 'white', outline: 'none' }}
             />
             <button type="submit" style={{ background: 'none', border: 'none', color: 'var(--accent-color)', marginLeft: '10px', cursor: 'pointer', fontWeight: 'bold' }}>Post</button>
           </form>
           <div className="comments-list">
             {post.comments && post.comments.map((comment, idx) => (
-              <div key={idx} className="comment-item" style={{ marginBottom: '10px', display: 'flex', alignItems: 'flex-start' }}>
+              <div key={idx} className="comment-item">
                 <img src={comment.user.avatar} alt={comment.user.name} className="avatar" style={{ width: '24px', height: '24px', marginRight: '8px' }} />
-                <div style={{ background: 'var(--hover-bg)', padding: '8px 12px', borderRadius: '12px', flex: 1 }}>
+                <div className="comment-bubble">
                   <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 'bold' }}>{comment.user.name}</p>
                   <p style={{ margin: 0, fontSize: '0.85rem' }}>{comment.text}</p>
                 </div>

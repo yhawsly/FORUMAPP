@@ -8,13 +8,11 @@ import {
   faHashtag,
   faUser,
   faSearch,
-  faPlus,
-  faEllipsisVertical,
-  faFaceSmile,
-  faImage,
   faCommentDots,
   faCamera,
-  faSignOutAlt
+  faSignOutAlt,
+  faImage,
+  faFaceSmile
 } from '@fortawesome/free-solid-svg-icons';
 import Post from './Post';
 import Chat from './Chat';
@@ -107,11 +105,31 @@ function App() {
   });
 
   const [activeChatUser, setActiveChatUser] = useState(null); // null means Global Chat
+  const [shareContent, setShareContent] = useState(null); // Content to share
 
   const handleStartDM = (user) => {
     if (user.name === currentUser.name) return;
     setActiveChatUser(user);
     setActiveTab('Chat');
+  };
+
+  const handleDirectShare = (targetUser, content) => {
+    const text = typeof content === 'string' ? content : `Shared post from ${content.user.name}: "${content.content}"`;
+    const chatKey = [currentUser.name, targetUser.name].sort().join('_');
+    const newMessage = {
+      id: Date.now(),
+      user: { name: currentUser.name, avatar: currentUser.avatar },
+      text: text,
+      timestamp: getFormattedTime()
+    };
+
+    setDirectMessages(prev => ({
+      ...prev,
+      [chatKey]: [...(prev[chatKey] || []), newMessage]
+    }));
+    setActiveChatUser(targetUser);
+    setActiveTab('Chat');
+    setShareContent(null);
   };
 
   // Persistence Effects
@@ -275,11 +293,11 @@ function App() {
           />
         </div>
         <div className="nav-right">
-          <FontAwesomeIcon icon={faBell} className="icon" style={{ cursor: 'pointer', fontSize: '1.2rem' }} onClick={() => setActiveTab('Notifications')} />
+          <FontAwesomeIcon icon={faBell} className="icon" style={{ cursor: 'pointer' }} onClick={() => setActiveTab('Notifications')} />
           <img
             src={currentUser.avatar}
             className="avatar"
-            style={{ width: '32px', height: '32px', marginLeft: '15px', cursor: 'pointer' }}
+            style={{ width: '30px', height: '30px', marginLeft: '10px', cursor: 'pointer' }}
             onClick={() => setActiveTab('Profile')}
           />
         </div>
@@ -371,7 +389,14 @@ function App() {
 
               <div className="feed">
                 {posts.map(post => (
-                  <Post key={post.id} post={post} onLike={handleLike} onComment={handleComment} />
+                  <Post
+                    key={post.id}
+                    post={post}
+                    onLike={handleLike}
+                    onComment={handleComment}
+                    onMessage={handleStartDM}
+                    onShareToDM={(p) => setShareContent(p)}
+                  />
                 ))}
               </div>
             </>
@@ -379,10 +404,17 @@ function App() {
 
           {activeTab === 'Chat' && (
             <Chat
-              messages={messages}
+              messages={activeChatUser ? (directMessages[[currentUser.name, activeChatUser.name].sort().join('_')] || []) : messages}
               onSendMessage={handleSendMessage}
               onForwardMessage={handleForwardMessage}
+              onForwardToDM={(msg) => setShareContent(msg)}
               currentUser={currentUser}
+              activeChatUser={activeChatUser}
+              onSwitchChat={setActiveChatUser}
+              availableUsers={Array.from(new Map([
+                ...posts.map(p => [p.user.name, p.user]),
+                ...messages.map(m => [m.user.name, m.user])
+              ]).values()).filter(u => u.name !== currentUser.name)}
             />
           )}
 
@@ -396,7 +428,14 @@ function App() {
               </div>
               <div className="feed">
                 {filteredPosts.map(post => (
-                  <Post key={post.id} post={post} onLike={handleLike} onComment={handleComment} />
+                  <Post
+                    key={post.id}
+                    post={post}
+                    onLike={handleLike}
+                    onComment={handleComment}
+                    onMessage={handleStartDM}
+                    onShareToDM={(p) => setShareContent(p)}
+                  />
                 ))}
               </div>
             </div>
@@ -476,9 +515,13 @@ function App() {
             <div className="profile-edit-view" style={{ padding: '20px', backgroundColor: 'var(--secondary-bg)', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
               <h2>Edit Profile</h2>
               <div style={{ marginTop: '20px' }}>
-                <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
-                  <div style={{ position: 'relative' }}>
-                    <img src={currentUser.avatar} className="avatar" style={{ width: '100px', height: '100px' }} />
+                <div className="profile-edit-header">
+                  <div style={{ position: 'relative', display: 'inline-block' }}>
+                    <img
+                      src={currentUser.avatar}
+                      className="avatar"
+                      style={{ width: '100px', height: '100px', border: '3px solid var(--accent-color)' }}
+                    />
                     <label htmlFor="avatar-upload" style={{ position: 'absolute', bottom: '0', right: '0', background: 'var(--accent-color)', padding: '8px', borderRadius: '50%', cursor: 'pointer' }}>
                       <FontAwesomeIcon icon={faCamera} style={{ color: 'white' }} />
                     </label>
@@ -498,7 +541,7 @@ function App() {
                   </div>
                   <div style={{ marginLeft: '25px' }}>
                     <h3>{currentUser.name}</h3>
-                    <p style={{ color: 'var(--text-secondary)' }}>Update your profile details</p>
+                    <p style={{ color: 'var(--text-secondary)', margin: 0 }}>Update your profile details</p>
                   </div>
                 </div>
                 <div style={{ marginBottom: '15px' }}>
@@ -565,6 +608,64 @@ function App() {
           </div>
         </aside>
       </div>
+
+      {shareContent && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(0,0,0,0.8)',
+          backdropFilter: 'blur(5px)',
+          zIndex: 2000,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '20px'
+        }}>
+          <div style={{
+            background: 'var(--secondary-bg)',
+            borderRadius: '24px',
+            width: '100%',
+            maxWidth: '400px',
+            border: '1px solid var(--border-color)',
+            overflow: 'hidden'
+          }}>
+            <div style={{ padding: '20px', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <h3 style={{ margin: 0 }}>Forward to...</h3>
+              <button
+                onClick={() => setShareContent(null)}
+                style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '1.2rem' }}
+              >✕</button>
+            </div>
+            <div style={{ maxHeight: '400px', overflowY: 'auto', padding: '10px' }}>
+              {Array.from(new Map([
+                ...posts.map(p => [p.user.name, p.user]),
+                ...messages.map(m => [m.user.name, m.user])
+              ]).values()).filter(u => u.name !== currentUser.name).map(user => (
+                <div
+                  key={user.name}
+                  className="contact-item"
+                  onClick={() => handleDirectShare(user, shareContent)}
+                  style={{ display: 'flex', alignItems: 'center', padding: '12px', borderRadius: '12px', cursor: 'pointer', margin: '5px' }}
+                >
+                  <img src={user.avatar} className="avatar" style={{ width: '40px', height: '40px', marginRight: '15px' }} />
+                  <span style={{ fontWeight: '500' }}>{user.name}</span>
+                </div>
+              ))}
+              {Array.from(new Map([
+                ...posts.map(p => [p.user.name, p.user]),
+                ...messages.map(m => [m.user.name, m.user])
+              ]).values()).filter(u => u.name !== currentUser.name).length === 0 && (
+                  <div style={{ padding: '40px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+                    No contacts found yet.
+                  </div>
+                )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

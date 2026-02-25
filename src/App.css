@@ -120,6 +120,63 @@ body {
   font-size: 1.2rem;
 }
 
+.action-btn .icon {
+  margin-right: 6px;
+}
+
+/* Comments & Profile Responsiveness */
+.comments-section {
+  margin-top: 15px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 15px;
+}
+
+.comment-input-area {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.comment-input {
+  flex: 1;
+  background: var(--primary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 8px 15px;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.comment-item {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.comment-bubble {
+  background: var(--hover-bg);
+  padding: 8px 12px;
+  border-radius: 12px;
+  flex: 1;
+}
+
+.profile-edit-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 500px) {
+  .profile-edit-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-edit-header div {
+    margin-left: 0 !important;
+    margin-top: 15px;
+  }
+}
+
 /* Feed Column */
 .feed-container {
   border-right: 1px solid var(--border-color);
@@ -209,8 +266,101 @@ body {
   color: var(--accent-color);
 }
 
-.action-btn .icon {
-  margin-right: 6px;
+/* Auth Component */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--primary-bg);
+  color: var(--text-primary);
+  padding: 20px;
+}
+
+.auth-card {
+  background: var(--secondary-bg);
+  padding: 40px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.auth-avatar-container {
+  position: relative;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+
+.auth-avatar-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--accent-color);
+}
+
+.auth-avatar-upload-label {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: var(--accent-color);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.auth-input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.auth-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--primary-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.auth-footer {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 450px) {
+  .auth-container {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .auth-card {
+    padding: 40px 20px;
+    border-radius: 0;
+    min-height: 100vh;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 /* Create Post Area */
@@ -388,13 +538,9 @@ body {
   .app-container {
     grid-template-columns: 80px 1fr 300px;
   }
-
-  .nav-item span {
-    display: none;
-  }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .app-container {
     grid-template-columns: 80px 1fr;
   }
@@ -402,33 +548,151 @@ body {
   .trending-container {
     display: none;
   }
+
+  .search-bar {
+    width: 60%;
+  }
+}
+
+@media (max-width: 650px) {
+  .search-bar {
+    display: none;
+    /* Hide search on small screens */
+  }
+
+  .navbar {
+    padding: 0 15px;
+  }
 }
 
 @media (max-width: 500px) {
   .app-container {
     grid-template-columns: 1fr;
+    width: 100%;
   }
 
   .sidebar {
     position: fixed;
     bottom: 0;
     top: auto;
+    left: 0;
     width: 100%;
     height: 60px;
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
     padding: 0;
     border-right: none;
     border-top: 1px solid var(--border-color);
-    z-index: 100;
+    z-index: 1000;
+    background-color: var(--secondary-bg);
   }
 
   .nav-item {
+    flex: 1;
+    justify-content: center;
     padding: 10px;
+    margin: 0;
+  }
+
+  .sidebar span {
+    display: none;
   }
 
   .feed-container {
+    padding: 10px;
     margin-bottom: 60px;
+    /* Space for bottom bar */
     border-right: none;
   }
+
+  .post-card {
+    border-radius: 0;
+    margin-left: -10px;
+    margin-right: -10px;
+    border-left: none;
+    border-right: none;
+  }
+
+  /* Chat Mobile Adjustments */
+  .chat-layout {
+    flex-direction: column !important;
+    height: calc(100vh - 130px) !important;
+  }
+
+  .chat-sidebar {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 150px;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .contacts-list {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 10px;
+  }
+
+  .contact-item {
+    flex-shrink: 0;
+    padding: 5px 15px !important;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .contact-item .avatar {
+    margin-right: 0 !important;
+    margin-bottom: 5px;
+  }
+
+  .contact-item span {
+    font-size: 0.7rem;
+  }
+
+  .message-bubble {
+    max-width: 90% !important;
+  }
+}
+
+/* Base Chat Classes */
+.chat-layout {
+  display: flex;
+  background-color: var(--secondary-bg);
+  height: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.chat-sidebar {
+  width: 250px;
+  border-right: 1px solid var(--border-color);
+  background: var(--secondary-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.contacts-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.contact-item {
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.contact-item:hover,
+.contact-item.active {
+  background: var(--hover-bg);
+}
+
+.contact-item.active {
+  border-left: 3px solid var(--accent-color);
 }

@@ -1,0 +1,78 @@
+﻿
+C:\Users\CRYPTO\Desktop\FORUMAPP\src\App.jsx
+  11:3  error  'faPlus' is defined but never used              no-unused-vars
+  12:3  error  'faEllipsisVertical' is defined but never used  no-unused-vars
+
+C:\Users\CRYPTO\Desktop\FORUMAPP\src\Auth.jsx
+  3:10  error  'faUser' is defined but never used                 no-unused-vars
+  5:17  error  'onLogin' is missing in props validation           react/prop-types
+  8:23  error  'setIsNewUser' is assigned a value but never used  no-unused-vars
+
+C:\Users\CRYPTO\Desktop\FORUMAPP\src\Chat.jsx
+   6:17   error  'messages' is missing in props validation             react/prop-types
+   6:27   error  'onSendMessage' is missing in props validation        react/prop-types
+   6:42   error  'onForwardMessage' is missing in props validation     react/prop-types
+   6:60   error  'currentUser' is missing in props validation          react/prop-types
+   6:73   error  'activeChatUser' is missing in props validation       react/prop-types
+   6:89   error  'onSwitchChat' is missing in props validation         react/prop-types
+   6:103  error  'availableUsers' is missing in props validation       react/prop-types
+  45:37   error  'availableUsers.map' is missing in props validation   react/prop-types
+  48:72   error  'activeChatUser.name' is missing in props validation  react/prop-types
+  60:58   error  'activeChatUser.name' is missing in props validation  react/prop-types
+  65:31   error  'messages.length' is missing in props validation      react/prop-types
+  65:53   error  'messages.map' is missing in props validation         react/prop-types
+  68:88   error  'currentUser.name' is missing in props validation     react/prop-types
+  70:61   error  'currentUser.name' is missing in props validation     react/prop-types
+
+C:\Users\CRYPTO\Desktop\FORUMAPP\src\EmojiPicker.jsx
+   1:10  error  'useState' is defined but never used       no-unused-vars
+  21:24  error  'onSelect' is missing in props validation  react/prop-types
+  21:34  error  'onClose' is missing in props validation   react/prop-types
+
+C:\Users\CRYPTO\Desktop\FORUMAPP\src\Post.jsx
+   5:17  error  'post' is missing in props validation                  react/prop-types
+   5:23  error  'onLike' is missing in props validation                react/prop-types
+   5:31  error  'onComment' is missing in props validation             react/prop-types
+   5:42  error  'onShare' is missing in props validation               react/prop-types
+   5:51  error  'onMessage' is missing in props validation             react/prop-types
+  12:20  error  'post.id' is missing in props validation               react/prop-types
+  17:58  error  'post.user' is missing in props validation             react/prop-types
+  17:63  error  'post.user.name' is missing in props validation        react/prop-types
+  17:78  error  'post.content' is missing in props validation          react/prop-types
+  20:31  error  'post.id' is missing in props validation               react/prop-types
+  26:24  error  'post.user' is missing in props validation             react/prop-types
+  26:29  error  'post.user.avatar' is missing in props validation      react/prop-types
+  26:47  error  'post.user' is missing in props validation             react/prop-types
+  26:52  error  'post.user.name' is missing in props validation        react/prop-types
+  28:21  error  'post.user' is missing in props validation             react/prop-types
+  28:26  error  'post.user.name' is missing in props validation        react/prop-types
+  29:23  error  'post.timestamp' is missing in props validation        react/prop-types
+  33:18  error  'post.content' is missing in props validation          react/prop-types
+  34:15  error  'post.image' is missing in props validation            react/prop-types
+  34:39  error  'post.image' is missing in props validation            react/prop-types
+  39:38  error  'post.id' is missing in props validation               react/prop-types
+  40:32  error  'post.isLiked' is missing in props validation          react/prop-types
+  43:17  error  'post.likes' is missing in props validation            react/prop-types
+  47:17  error  'post.comments' is missing in props validation         react/prop-types
+  47:27  error  'post.comments.length' is missing in props validation  react/prop-types
+  51:17  error  'post.retweets' is missing in props validation         react/prop-types
+  56:83  error  'post.user' is missing in props validation             react/prop-types
+  74:19  error  'post.comments' is missing in props validation         react/prop-types
+  74:36  error  'post.comments' is missing in props validation         react/prop-types
+  74:45  error  'post.comments.map' is missing in props validation     react/prop-types
+
+C:\Users\CRYPTO\Desktop\FORUMAPP\src\assets\forum\Theme.jsx
+  4:39  error  'useState' is not defined  no-undef
+
+C:\Users\CRYPTO\Desktop\FORUMAPP\src\book.jsx
+   1:10  warning  Fast refresh only works when a file has exports. Move your component(s) to a separate file  react-refresh/only-export-components
+   1:10  error    'Booklist' is defined but never used                                                        no-unused-vars
+   5:40  error    'id' is assigned a value but never used                                                     no-unused-vars
+   6:24  error    Missing "key" prop for element in iterator                                                  react/jsx-key
+  19:7   warning  Fast refresh only works when a file has exports. Move your component(s) to a separate file  react-refresh/only-export-components
+  29:7   warning  Fast refresh only works when a file has exports. Move your component(s) to a separate file  react-refresh/only-export-components
+  30:7   warning  Fast refresh only works when a file has exports. Move your component(s) to a separate file  react-refresh/only-export-components
+  35:7   warning  Fast refresh only works when a file has exports. Move your component(s) to a separate file  react-refresh/only-export-components
+
+Γ£û 61 problems (56 errors, 5 warnings)
+

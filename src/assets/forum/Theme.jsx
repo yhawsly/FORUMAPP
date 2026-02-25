@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import "./ThemeToggle.css";
 
 function ThemeToggle() {
@@ -17,7 +18,6 @@ function ThemeToggle() {
       </div>
       <div>
         <h1>Light/Dark Theme Toggle</h1>
-        <ThemeToggle />
       </div>
     </div>
   );

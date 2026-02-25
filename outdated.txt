@@ -1,0 +1,14 @@
+﻿Package                            Current   Wanted   Latest  Location                                        Depended by
+@fortawesome/fontawesome-svg-core    6.7.2    6.7.2    7.2.0  node_modules/@fortawesome/fontawesome-svg-core  FORUMAPP
+@fortawesome/free-solid-svg-icons    6.7.2    6.7.2    7.2.0  node_modules/@fortawesome/free-solid-svg-icons  FORUMAPP
+@fortawesome/react-fontawesome       0.2.6    0.2.6    3.2.0  node_modules/@fortawesome/react-fontawesome     FORUMAPP
+@types/react                       18.3.28  18.3.28  19.2.14  node_modules/@types/react                       FORUMAPP
+@types/react-dom                    18.3.7   18.3.7   19.2.3  node_modules/@types/react-dom                   FORUMAPP
+@vitejs/plugin-react                 4.7.0    4.7.0    5.1.4  node_modules/@vitejs/plugin-react               FORUMAPP
+eslint                              8.57.1   8.57.1   10.0.2  node_modules/eslint                             FORUMAPP
+eslint-plugin-react-hooks            4.6.2    4.6.2    7.0.1  node_modules/eslint-plugin-react-hooks          FORUMAPP
+eslint-plugin-react-refresh         0.4.26   0.4.26    0.5.2  node_modules/eslint-plugin-react-refresh        FORUMAPP
+react                               18.3.1   18.3.1   19.2.4  node_modules/react                              FORUMAPP
+react-dom                           18.3.1   18.3.1   19.2.4  node_modules/react-dom                          FORUMAPP
+react-icons                         4.12.0   4.12.0    5.5.0  node_modules/react-icons                        FORUMAPP
+vite                                4.5.14   4.5.14    7.3.1  node_modules/vite                               FORUMAPP
