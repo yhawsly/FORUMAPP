@@ -6,6 +6,17 @@
   --text-secondary: #8696a0;
   --border-color: #222d34;
   --hover-bg: #202c33;
+  --transition-speed: 0.3s;
+}
+
+[data-theme='light'] {
+  --primary-bg: #f0f2f5;
+  --secondary-bg: #ffffff;
+  --accent-color: #1d9bf0;
+  --text-primary: #0f1419;
+  --text-secondary: #536471;
+  --border-color: #eff3f4;
+  --hover-bg: #f7f9f9;
 }
 
 body {
@@ -14,6 +25,11 @@ body {
   background-color: var(--primary-bg);
   color: var(--text-primary);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.app {
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 #root {

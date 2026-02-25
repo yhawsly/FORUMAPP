@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faComment, faShare, faRetweet } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faComment, faShare, faRetweet, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
-const Post = ({ post, onLike, onComment, onShare }) => {
+const Post = ({ post, onLike, onComment, onShare, onMessage }) => {
   const [showComments, setShowComments] = useState(false);
   const [commentText, setCommentText] = useState('');
 
@@ -52,6 +52,9 @@ const Post = ({ post, onLike, onComment, onShare }) => {
         </button>
         <button className="action-btn" onClick={handleShare}>
           <FontAwesomeIcon icon={faShare} className="icon" />
+        </button>
+        <button className="action-btn" onClick={() => onMessage && onMessage(post.user)} title="Message User">
+          <FontAwesomeIcon icon={faEnvelope} className="icon" />
         </button>
       </div>
 

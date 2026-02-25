@@ -128,6 +128,10 @@ const Auth = ({ onLogin }) => {
                         align-items: flex-start !important;
                     }
                 }
+                input::placeholder {
+                    color: var(--text-secondary);
+                    opacity: 0.7;
+                }
             `}</style>
         </div>
     );

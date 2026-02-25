@@ -97,6 +97,23 @@ function App() {
   const [postImage, setPostImage] = useState(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('gospel_theme') || 'dark';
+  });
+
+  const [directMessages, setDirectMessages] = useState(() => {
+    const saved = localStorage.getItem('gospel_dms');
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  const [activeChatUser, setActiveChatUser] = useState(null); // null means Global Chat
+
+  const handleStartDM = (user) => {
+    if (user.name === currentUser.name) return;
+    setActiveChatUser(user);
+    setActiveTab('Chat');
+  };
+
   // Persistence Effects
   useEffect(() => {
     localStorage.setItem('gospel_posts', JSON.stringify(posts));
@@ -107,8 +124,21 @@ function App() {
   }, [messages]);
 
   useEffect(() => {
+    localStorage.setItem('gospel_dms', JSON.stringify(directMessages));
+  }, [directMessages]);
+
+  useEffect(() => {
     localStorage.setItem('gospel_user', JSON.stringify(currentUser));
   }, [currentUser]);
+
+  useEffect(() => {
+    localStorage.setItem('gospel_theme', theme);
+    document.body.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const handleThemeToggle = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
 
   // Dynamic Trending Logic
   const trendingTopics = useMemo(() => {
@@ -191,7 +221,16 @@ function App() {
       text: text,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
-    setMessages([...messages, newMessage]);
+
+    if (activeChatUser) {
+      const chatKey = [currentUser.name, activeChatUser.name].sort().join('_');
+      setDirectMessages({
+        ...directMessages,
+        [chatKey]: [...(directMessages[chatKey] || []), newMessage]
+      });
+    } else {
+      setMessages([...messages, newMessage]);
+    }
   };
 
   const handleLike = (postId) => {
@@ -388,9 +427,29 @@ function App() {
                 <div style={{ marginBottom: '25px', paddingBottom: '15px', borderBottom: '1px solid var(--border-color)' }}>
                   <h3>Appearance</h3>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
-                    <span>Dark Mode</span>
-                    <div style={{ width: '40px', height: '20px', background: 'var(--accent-color)', borderRadius: '20px', position: 'relative', cursor: 'pointer' }}>
-                      <div style={{ width: '16px', height: '16px', background: 'white', borderRadius: '50%', position: 'absolute', top: '2px', right: '2px' }}></div>
+                    <span>{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</span>
+                    <div
+                      onClick={handleThemeToggle}
+                      style={{
+                        width: '40px',
+                        height: '20px',
+                        background: 'var(--accent-color)',
+                        borderRadius: '20px',
+                        position: 'relative',
+                        cursor: 'pointer',
+                        transition: 'background 0.3s'
+                      }}
+                    >
+                      <div style={{
+                        width: '16px',
+                        height: '16px',
+                        background: 'white',
+                        borderRadius: '50%',
+                        position: 'absolute',
+                        top: '2px',
+                        transition: 'left 0.3s',
+                        left: theme === 'dark' ? '22px' : '2px'
+                      }}></div>
                     </div>
                   </div>
                 </div>
